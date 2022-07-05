@@ -20,3 +20,12 @@ def create(req):
     # print(new_member['id'])
     members.append(new_member)
     return new_member, 201
+
+def show(req, uid):
+    return find_by_uid(uid), 200
+
+def find_by_uid(uid):
+     try:
+        return next(member for member in members if member['id'] == uid)
+    except:
+        raise BadRequest(f"We don't have that cat with id {uid}!")
