@@ -11,10 +11,18 @@ def home():
     return jsonify({'message': "What's up from Scotland BABY"}), 200
 
 @app.route('/members', methods=['GET', 'POST'])
-def member_handler():
+def members_handler():
     fns = {
         'GET': members.index,
         'POST': members.create
+    }
+    resp, code = fns[request.method](request)
+    return jsonify(resp), code
+
+@app.route('/members/<int:member_id>', methods=['GET'])
+def member_handler(member_id):
+    fns ={
+        'GET': members.show
     }
     resp, code = fns[request.method](request)
     return jsonify(resp), code
