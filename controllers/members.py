@@ -40,7 +40,7 @@ def update(req, uid):
     print(request)
     for key, val in request.items():
         to_update[key] = val
-    return to_update, 200
+    return to_update, 202
 
 
 def destroy(req, uid):

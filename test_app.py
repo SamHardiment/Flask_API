@@ -6,40 +6,41 @@ class TestAPICase():
         assert res.status == '200 OK'
         assert res.json['message'] == "What's up from Scotland BABY"
 
-
-
-
     def test_get_members_handler(self, api):
-        res = api.get('/api/cats')
+        res = api.get('/members')
         assert res.status == '200 OK'
         assert len(res.json) == 2
 
-    def test_get_cat(self, api):
-        res = api.get('/api/cats/2')
+
+    def test_post_members_handler(self, api):
+        mock_member = json.dumps({'name': 'name'})
+        mock_headers = {'Content-Type': 'application/json'}
+
+        res = api.post('/members', data=mock_member, headers=mock_headers)
+        assert res.status == '201 CREATED'
+        assert res.json['name'] == 'name'
+
+
+    def test_get_member_handler(self, api):
+        res = api.get('/members/1')
         assert res.status == '200 OK'
-        assert res.json['name'] == 'Test Cat 2'
+        assert res.json['name'] == 'sam'
 
-    def test_get_cats_error(self, api):
-        res = api.get('/api/cats/4')
-        assert res.status == '400 BAD REQUEST'
-        assert "cat with id 4" in res.json['message']
 
-    def test_post_cats(self, api):
-        mock_data = json.dumps({'name': 'Molly'})
+    def test_patch_member_handler(self, api):
+        mock_changes = json.dumps({'alter-ego': 'batman'})
         mock_headers = {'Content-Type': 'application/json'}
-        res = api.post('/api/cats', data=mock_data, headers=mock_headers)
-        assert res.json['id'] == 3
 
-    def test_patch_cat(self, api):
-        mock_data = json.dumps({'name': 'Molly'})
-        mock_headers = {'Content-Type': 'application/json'}
-        res = api.patch('/api/cats/2', data=mock_data, headers=mock_headers)
-        assert res.json['id'] == 2
-        assert res.json['name'] == 'Molly'
+        res = api.patch('members/1', data=mock_changes, headers=mock_headers)
+        assert res.status == '202 ACCEPTED'
+        assert res.json['alter-ego'] == 'batman'
 
-    def test_delete_cat(self, api):
-        res = api.delete('/api/cats/1')
+
+    def test_delete_member_handler(self, api):
+        res = api.delete('members/1')
         assert res.status == '204 NO CONTENT'
+
+
 
     def test_not_found(self, api):
         res = api.get('/bob')

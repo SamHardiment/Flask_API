@@ -2,9 +2,22 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from controllers import members
 from werkzeug import exceptions
+from flask_pymongo import PyMongo
+
+
 
 app = Flask(__name__)
 CORS(app)
+
+
+
+## Mongo stuff
+mongodb_client = PyMongo(app, uri="mongodb+srv://gio:gio@cluster0.er7j3.mongodb.net/?retryWrites=true&w=majority")
+
+
+
+#######
+
 
 @app.route('/')
 def home():
