@@ -25,7 +25,34 @@ def show(req, uid):
     return find_by_uid(uid), 200
 
 def find_by_uid(uid):
-     try:
+    try:
         return next(member for member in members if member['id'] == uid)
     except:
         raise BadRequest(f"We don't have that cat with id {uid}!")
+
+
+
+
+def update(req, uid):
+    to_update = find_by_uid(uid)
+    request = req.get_json()
+    print(request)
+    for key, val in request.items():
+        members[key] = val
+    return to_update, 200
+
+
+def destroy(req, uid):
+    to_remove = find_by_uid(uid)
+    members.remove(to_remove)
+    return to_remove, 204
+
+
+
+
+
+
+
+
+
+
