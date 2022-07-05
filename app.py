@@ -19,12 +19,14 @@ def members_handler():
     resp, code = fns[request.method](request)
     return jsonify(resp), code
 
-@app.route('/members/<int:member_id>', methods=['GET'])
+@app.route('/members/<int:member_id>', methods=['GET', 'PATCH', 'DELETE'])
 def member_handler(member_id):
     fns ={
-        'GET': members.show
+        'GET': members.show,
+        'PATCH': members.update,
+        'DELETE': members.destroy
     }
-    resp, code = fns[request.method](request)
+    resp, code = fns[request.method](request, uid=member_id)
     return jsonify(resp), code
 
 @app.errorhandler(exceptions.NotFound)

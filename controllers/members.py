@@ -28,7 +28,7 @@ def find_by_uid(uid):
     try:
         return next(member for member in members if member['id'] == uid)
     except:
-        raise BadRequest(f"We don't have that cat with id {uid}!")
+        raise BadRequest(f"We don't have that member with id {uid}!")
 
 
 
@@ -38,7 +38,7 @@ def update(req, uid):
     request = req.get_json()
     print(request)
     for key, val in request.items():
-        members[key] = val
+        to_update[key] = val
     return to_update, 200
 
 
