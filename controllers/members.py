@@ -3,6 +3,7 @@ from werkzeug.exceptions import BadRequest
 
 members = [
     {'id': 1, 'name': 'Sam', 'alter-ego': 'ADogHas2Bark'},
+    {'id': 3, 'name': 'Gio', 'alter-ego': 'johnny'},
     {'id': 2, 'name': 'Amir', 'alter-ego': 'IceMan'},
 ]
 
