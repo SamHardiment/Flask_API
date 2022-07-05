@@ -21,10 +21,10 @@ def members_handler():
 
 @app.route('/members/<int:member_id>', methods=['GET'])
 def member_handler(member_id):
-    fns ={
+    fns = {
         'GET': members.show
     }
-    resp, code = fns[request.method](request)
+    resp, code = fns[request.method](request, member_id)
     return jsonify(resp), code
 
 @app.errorhandler(exceptions.NotFound)

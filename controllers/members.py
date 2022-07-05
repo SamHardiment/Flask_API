@@ -3,6 +3,7 @@ from werkzeug.exceptions import BadRequest
 
 members = [
     {'id': 1, 'name': 'Sam', 'alter-ego': 'ADogHas2Bark'},
+    {'id': 3, 'name': 'Gio', 'alter-ego': 'johnny'},
     {'id': 2, 'name': 'Amir', 'alter-ego': 'IceMan'},
 ]
 
@@ -25,7 +26,7 @@ def show(req, uid):
     return find_by_uid(uid), 200
 
 def find_by_uid(uid):
-     try:
+    try:
         return next(member for member in members if member['id'] == uid)
     except:
-        raise BadRequest(f"We don't have that cat with id {uid}!")
+        raise BadRequest(f"We don't have a member with id {uid}!")
