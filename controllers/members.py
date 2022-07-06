@@ -22,7 +22,7 @@ def create(req):
     # print(new_member['id'])
     members.append(new_member)
     # print(members)
-    return new_member, 201
+    return members, 201
 
 def show(req, uid):
     return find_by_uid(uid), 200
