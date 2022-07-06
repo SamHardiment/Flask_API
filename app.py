@@ -29,10 +29,14 @@ def members_handler():
         'GET': members.index,
         'POST': members.create
     }
-    resp, code = fns[request.method](request)
-    return render_template('index.html', ), code
-    # return jsonify(resp), code
-    #  result=resp
+    if request.method == 'POST':
+        obj = { "name": request.form['name'], 'alter-ego': request.form['alterego']}
+        resp, code = fns[request.method](jsonify(obj))
+        print(resp)
+    elif request.method == 'GET':
+        resp, code = fns[request.method](request)
+        print(resp)
+    return render_template('index.html',  members = resp), code
 
 @app.route('/members/<int:member_id>', methods=['GET', 'PATCH', 'DELETE'])
 def member_handler(member_id):

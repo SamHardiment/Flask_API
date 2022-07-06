@@ -16,11 +16,12 @@ def index(req):
 
 def create(req):
     new_member = req.get_json()
-    # .get_json()
-    print(new_member)
-    # new_member['id'] = (sorted([m['id'] for m in members])[-1] + 1)
-    # # print(new_member['id'])
-    # members.append(new_member)
+    
+    # print(new_member)
+    new_member['id'] = (sorted([m['id'] for m in members])[-1] + 1)
+    # print(new_member['id'])
+    members.append(new_member)
+    # print(members)
     return new_member, 201
 
 def show(req, uid):
