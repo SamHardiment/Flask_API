@@ -1,8 +1,8 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 from controllers import members
 from werkzeug import exceptions
-from flask_pymongo import PyMongo
+# from flask_pymongo import PyMongo
 
 
 
@@ -11,8 +11,8 @@ CORS(app)
 
 
 
-## Mongo stuff
-mongodb_client = PyMongo(app, uri="mongodb+srv://gio:gio@cluster0.er7j3.mongodb.net/?retryWrites=true&w=majority")
+# ## Mongo stuff
+# mongodb_client = PyMongo(app, uri="mongodb+srv://gio:gio@cluster0.er7j3.mongodb.net/?retryWrites=true&w=majority")
 
 
 
@@ -30,7 +30,9 @@ def members_handler():
         'POST': members.create
     }
     resp, code = fns[request.method](request)
-    return jsonify(resp), code
+    return render_template('index.html', ), code
+    # return jsonify(resp), code
+    #  result=resp
 
 @app.route('/members/<int:member_id>', methods=['GET', 'PATCH', 'DELETE'])
 def member_handler(member_id):
