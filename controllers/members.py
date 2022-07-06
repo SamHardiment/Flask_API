@@ -18,9 +18,9 @@ def create(req):
     new_member = req.get_json()
     print(type(sorted([m['id'] for m in members])[-1]))
     new_member['id'] = (sorted([m['id'] for m in members])[-1] + 1)
-    # print(new_member['id'])
+    print(new_member['id'])
     members.append(new_member)
-    return new_member, 201
+    return members, 201
 
 def show(req, uid):
     return find_by_uid(uid), 200
